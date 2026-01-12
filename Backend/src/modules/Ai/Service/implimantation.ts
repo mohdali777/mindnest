@@ -37,13 +37,13 @@ const Respose = await this.ai.askGemini(Data.message,user.mood as string,History
 let updated_section_id = section_id &&section_id !== "null" && section_id !== undefined && section_id !== 'undefined' ? section_id : GenaratorFunctions.generateSectionId(user._id as string)
 const ChatPayloads:Partial<CHAT_DTO[]> = [{
     section_id:updated_section_id,
-    content:Data.message,
-    user:"user",
+    content:Respose,
+    user:"model",
     user_id:user._id as string
 },{
     section_id:updated_section_id,
-    content:Respose,
-    user:"model",
+    content:Data.message,
+    user:"user",
     user_id:user._id as string
 }]
 await this.ChatRepo.Create(ChatPayloads as Partial<CHAT_DTO[]>)
