@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
-import ENV from "../config/env"
-import { TokenPayload } from "../../modules/Auth/DTO"
+import ENV from "../Config/env"
+import { USER_DTO } from "../../modules/User/DTO"
 import { injectable } from "tsyringe"
 
 @injectable()
@@ -12,11 +12,11 @@ this.Access_Secret_key = ENV.ACCESS_TOKEN_SECRET
 this.Refresh_Secret_key = ENV.REFRESH_TOKEN_SECRET
 }
 
-generateAccessToken(payload: TokenPayload): string {
+generateAccessToken(payload: Partial<USER_DTO>): string {
 return jwt.sign(payload, this.Access_Secret_key, { expiresIn: "15m" })
 }
 
-generateRefreshToken(payload: TokenPayload): string {
+generateRefreshToken(payload: Partial<USER_DTO>): string {
 return jwt.sign(payload, this.Refresh_Secret_key, { expiresIn: "7d" })
 }
 

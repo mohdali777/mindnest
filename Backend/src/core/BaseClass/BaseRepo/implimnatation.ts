@@ -4,10 +4,13 @@ import AppError from "../../Error/Error";
 
 export default class BaseRepo<T> implements IBaseRepo<T>{
 constructor(private Model:mongoose.Model<T>){}
-async Create(Data: T): Promise<string> {
+async Create(Data: Partial<T> | Partial<T[]>): Promise<string|string[]> {
 try {
 const doc = await this.Model.create(Data as any)
-return (doc as any)._id.toString();
+if (Array.isArray(doc)) {
+return doc.map(d => d._id.toString());
+}
+return (doc._id as any).toString();
 } catch (error) {
 console.log(error,"error while create");
 throw new AppError("failed to create",500) 
