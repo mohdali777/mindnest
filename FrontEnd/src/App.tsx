@@ -13,6 +13,7 @@ import JournalLayout from "./Component/layout/Journal"
 import Create from "./Pages/journal/Create"
 import View from "./Pages/journal/View"
 import UpdateJournal from "./Pages/journal/Update"
+import MentalHealthMiniGames from "./Pages/Games/games"
 
 function App() {
   return (
@@ -30,14 +31,12 @@ function App() {
     <Route path="/tips" element={<MentalWellnessTips/>}/>
     <Route path="/chatbot" element={<AIChatSupport/>}/>
     <Route path="/chatbot/:section_id" element={<AIChatSupport/>}/>
+     <Route path="/games" element={<MentalHealthMiniGames/>}/>
     <Route path="/journal" element={<JournalLayout/>}>
     <Route index  element={<View/>}/>
-      <Route path="create" element={<Create/>}/>
-      <Route path="update/:id" element={<UpdateJournal/>}/>
-
+    <Route path="create" element={<Create/>}/>
+    <Route path="update/:id" element={<UpdateJournal/>}/>
     </Route>
-    <Route path="/journal/test" element={<MoodJournal/>}/>
-
     </Route>
   </Route>
 

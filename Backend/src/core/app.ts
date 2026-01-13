@@ -6,6 +6,8 @@ import AppRoutes from "../routes/index";
 const app = Express();
 
 export default function setupApp() {
+    console.log("asdas");
+    
 app.use(cors({
     origin:"http://localhost:5173",
     credentials: true, 

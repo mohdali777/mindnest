@@ -19,7 +19,9 @@ let History:any = []
 console.log(section_id);
   
 if(section_id && section_id !== "null" && section_id !== undefined && section_id !== 'undefined'){
-const ChatHistory = await this.ChatRepo.FindMany({section_id:section_id})
+    console.log(section_id,'se');
+    
+const ChatHistory = await this.ChatRepo.FindMany({section_id:section_id,user_id:user._id})
  if (!ChatHistory || ChatHistory.length === 0) {
     throw new AppError("Chat history not found", 404);
   }
@@ -55,9 +57,13 @@ throw error
 
 async FindMany(section_id: string, user: Partial<USER_DTO>): Promise<CHAT_DTO[]|null> {
 try {
+    console.log(section_id,"secc");
+    
 const Filter:Partial<CHAT_DTO> = {user_id:user._id as string}
 if(section_id && section_id !== "null" && section_id !== undefined) Filter.section_id = section_id
 const Data = await this.ChatRepo.FindMany(Filter)
+console.log(Data);
+
  if (!Data || Data.length === 0) {
     throw new AppError("Chat history not found", 404);
   }
