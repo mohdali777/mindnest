@@ -4,7 +4,9 @@ import type { Journal } from '../../interface/journal';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../Redux/store';
 import JournalSercice from '../../Service/Journal';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'sonner';
+import { moodsUpdated } from '../../Utils/constants';
 
 function UpdateJournal() {
     const {_id} = useSelector((state:RootState)=>state.Auth)
@@ -20,20 +22,9 @@ function UpdateJournal() {
         tomorrow:"",
     })
  const [JournalFormOg,SetFormOg] = useState<Partial<Journal>>()
+ const navigate = useNavigate()
     const {id} = useParams()
-      const moods = [
-    { id: 'amazing', label: 'Amazing', icon: Star, color: 'from-yellow-400 to-orange-400', emoji: '🤩' },
-    { id: 'happy', label: 'Happy', icon: Smile, color: 'from-green-400 to-emerald-400', emoji: '😊' },
-    { id: 'neutral', label: 'Neutral', icon: Meh, color: 'from-blue-400 to-cyan-400', emoji: '😐' },
-    { id: 'sad', label: 'Sad', icon: Frown, color: 'from-indigo-400 to-purple-400', emoji: '😔' },
-    { id: 'stressed', label: 'Stressed', icon: Zap, color: 'from-red-400 to-pink-400', emoji: '😰' }
-  ];
-
-    const energyLevels = [
-    { id: 'high', label: 'High Energy', icon: Zap, color: 'bg-yellow-500' },
-    { id: 'medium', label: 'Medium Energy', icon: Sun, color: 'bg-orange-500' },
-    { id: 'low', label: 'Low Energy', icon: Moon, color: 'bg-purple-500' }
-  ];
+  const moods = moodsUpdated
 
 
    const toggleActivity = (activity:string) => {
@@ -66,7 +57,12 @@ function UpdateJournal() {
    const handleSaveEntry = async() => {
     const data = getUpdated()
     if(Object.keys(data).length < 1) return alert("no changes made")
-    await JournalSercice.Update(id,data)
+     try {
+          await JournalSercice.Update(id,data)
+          navigate("/journal")
+     } catch (error) {
+      toast.error("failed to update")
+     } 
    };
 
    async function FetchOne() {

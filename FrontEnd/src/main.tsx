@@ -5,11 +5,18 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./Redux/store";
+import { Toaster } from "sonner";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
       <BrowserRouter>
+       <Toaster
+          position="top-right"
+          richColors
+          closeButton
+          duration={3000}
+       />
         <App />
       </BrowserRouter>
     </Provider>

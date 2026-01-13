@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import AuthLayout from "../../Component/Auth/AuthLayout";
 import Input from "../../Component/Input/input";
-import { Eye, Mail } from "lucide-react";
+import { Eye, Loader, Loader2, Loader2Icon, LoaderCircle, LoaderPinwheel, LucideLoaderPinwheel, Mail } from "lucide-react";
 import Button from "../../Component/Auth/button";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../../Redux/store";
 import { login } from "../../Redux/Slices/Auth/reducers";
-
+import { toast } from "sonner";
 const Login = () => {
 const [LoginForm,SetForm] = useState<{email:string,password:string}>({
 email:"",
@@ -17,6 +16,7 @@ password:""
 
 const navigate = useNavigate()
 const dispatch = useDispatch<AppDispatch>()
+const [Loading,SetLoading] = useState<boolean>(false)
 
 function HandleChange(e:React.ChangeEvent<HTMLInputElement>){
 const {name,value} = e.target
@@ -25,14 +25,16 @@ SetForm((prev)=>({...prev,[name]:value}))
 
 const handleSubmit = async() => {
 console.log(LoginForm);
-if(!LoginForm.email.trim()) return alert("email feild is empty")
+if(!LoginForm.email.trim()) return toast.error("email feild is empty")
 if(!LoginForm.password.trim()) return toast.error("password feild is empty")
 if(LoginForm.password.length < 8) return toast.error("password should be 8 charecters")
 try {
+SetLoading(true)   
 await dispatch(login(LoginForm)).unwrap()
-alert('login success')
-} catch (error) {
-alert(error)
+ SetLoading(false)   
+} catch (error:any) {
+ SetLoading(false)   
+ toast.error("asd")
 }
 };
 
@@ -51,7 +53,7 @@ children={
 
 <Input label={"password"} type={"password"} value={LoginForm.password} onChange={HandleChange} placeholder="password" icon={<Eye/>} name={"password"}/>
 
-<Button HandleSubmit={handleSubmit} label={"Sign In"}/>
+<Button HandleSubmit={handleSubmit} label={"Sign In"} isLoading={Loading}/>
 </div>
 
 <div className="mt-8 text-center">

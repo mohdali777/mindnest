@@ -1,5 +1,14 @@
 import { Book, Brain, CloudRain, Coffee, Heart, Music, Sun, Wind } from "lucide-react";
-
+import {
+  Star,
+  Smile,
+  ThumbsUp,
+  Meh,
+  Moon,
+  AlertTriangle,
+  Frown,
+  Zap,
+} from "lucide-react";
   const Welnesstips = [
     {
       id: 1,
@@ -246,3 +255,68 @@ import { Book, Brain, CloudRain, Coffee, Heart, Music, Sun, Wind } from "lucide-
   ];
 
   export default Welnesstips
+
+
+
+  
+
+
+
+export const moodsUpdated = [
+  {
+    id: "amazing",
+    label: "Amazing",
+    emoji: "🤩",
+    icon: Star,
+    color: "from-yellow-400 to-orange-400",
+  },
+  {
+    id: "happy",
+    label: "Happy",
+    emoji: "😊",
+    icon: Smile,
+    color: "from-green-400 to-emerald-400",
+  },
+  {
+    id: "good",
+    label: "Good",
+    emoji: "🙂",
+    icon: ThumbsUp,
+    color: "from-lime-400 to-green-400",
+  },
+  {
+    id: "neutral",
+    label: "Neutral",
+    emoji: "😐",
+    icon: Meh,
+    color: "from-blue-400 to-cyan-400",
+  },
+  {
+    id: "tired",
+    label: "Tired",
+    emoji: "😴",
+    icon: Moon,
+    color: "from-indigo-400 to-purple-400",
+  },
+  {
+    id: "anxious",
+    label: "Anxious",
+    emoji: "😰",
+    icon: AlertTriangle,
+    color: "from-orange-400 to-red-400",
+  },
+  {
+    id: "sad",
+    label: "Sad",
+    emoji: "😢",
+    icon: Frown,
+    color: "from-blue-500 to-indigo-500",
+  },
+  {
+    id: "stressed",
+    label: "Stressed",
+    emoji: "😫",
+    icon: Zap,
+    color: "from-red-400 to-pink-400",
+  },
+];

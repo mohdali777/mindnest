@@ -15,6 +15,9 @@ const AuthSlice = createSlice({
 name: "Auth",
 initialState,
 reducers: {
+    UpdateMood:(state,action)=>{
+        state.mood = action.payload
+    }
 },
 extraReducers: (builder) => {
 builder
@@ -76,3 +79,4 @@ state.is_verify = false;
 });
 
 export default AuthSlice.reducer;
+export const {UpdateMood} =  AuthSlice.actions

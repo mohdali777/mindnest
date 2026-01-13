@@ -4,9 +4,13 @@ import type { Journal } from '../../interface/journal';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../Redux/store';
 import JournalSercice from '../../Service/Journal';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
+import { moodsUpdated } from '../../Utils/constants';
 
 function Create() {
     const {_id} = useSelector((state:RootState)=>state.Auth)
+    const navigate = useNavigate()
     const [JournalForm,SetForm] = useState<Journal>({
         user_id:_id as string,
         mood:"",
@@ -20,13 +24,7 @@ function Create() {
         tomorrow:"",
     })
 
-      const moods = [
-    { id: 'amazing', label: 'Amazing', icon: Star, color: 'from-yellow-400 to-orange-400', emoji: '🤩' },
-    { id: 'happy', label: 'Happy', icon: Smile, color: 'from-green-400 to-emerald-400', emoji: '😊' },
-    { id: 'neutral', label: 'Neutral', icon: Meh, color: 'from-blue-400 to-cyan-400', emoji: '😐' },
-    { id: 'sad', label: 'Sad', icon: Frown, color: 'from-indigo-400 to-purple-400', emoji: '😔' },
-    { id: 'stressed', label: 'Stressed', icon: Zap, color: 'from-red-400 to-pink-400', emoji: '😰' }
-  ];
+      const moods = moodsUpdated
 
     const energyLevels = [
     { id: 'high', label: 'High Energy', icon: Zap, color: 'bg-yellow-500' },
@@ -52,7 +50,12 @@ function Create() {
 
 
    const handleSaveEntry = async() => {
-    await JournalSercice.Create(JournalForm)
+    try {
+      await JournalSercice.Create(JournalForm)
+      navigate('/journal')
+    } catch (error) {
+      toast.error("failed to create journal")
+    }
    };
   return (
          <div className="bg-white rounded-3xl shadow-2xl p-8 border-2 border-purple-100">

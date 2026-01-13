@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../../Redux/store";
 import { signup } from "../../Redux/Slices/Auth/reducers";
+import { toast } from "sonner";
 
 const Signup = () => {
 const [LoginForm,SetForm] = useState<{user_name:string,email:string,password:string}>({
@@ -14,6 +15,7 @@ user_name:"",
 email:"",
 password:""
 })
+const [Loading,SetLoading] = useState<boolean>(false)
 
 const navigate = useNavigate()
 const dispatch = useDispatch<AppDispatch>()
@@ -23,15 +25,17 @@ SetForm((prev)=>({...prev,[name]:value}))
 }
 
 const handleSubmit = async() => {
-if(!LoginForm.user_name.trim()) return alert("user name feild is empty")
-if(!LoginForm.email.trim()) return alert("email feild is empty")
-if(!LoginForm.password.trim()) return alert("password feild is empty")
-if(LoginForm.password.length < 8) return alert("password should be 8 charecters")
+if(!LoginForm.user_name.trim()) return toast.error("user name feild is empty")
+if(!LoginForm.email.trim()) return toast.error("email feild is empty")
+if(!LoginForm.password.trim()) return toast.error("password feild is empty")
+if(LoginForm.password.length < 8) return toast.error("password should be 8 charecters")
+SetLoading(true)
 try {
 await dispatch(signup(LoginForm)).unwrap()
-alert('signup success')
+SetLoading(false)
 } catch (error) {
-alert(error)
+toast.error(error)
+SetLoading(false)
 }
 };
 
@@ -51,7 +55,7 @@ children={
 
 <Input label={"password"} type={"password"} value={LoginForm.password} onChange={HandleChange} placeholder="password" icon={<Eye/>} name={"password"}/>
 
-<Button HandleSubmit={handleSubmit} label={"Create Account"}/>
+<Button HandleSubmit={handleSubmit} label={"Create Account"} isLoading={Loading}/>
 </div>
 
 

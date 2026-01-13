@@ -1,10 +1,11 @@
 import { AxiosError } from "axios";
 import axiosInstance from "../Api/axiosinstance";
+import { toast } from "sonner";
 export default class JournalService{
  static async Create(Data) {
    try {
     const res = await axiosInstance.post("/journal",Data)
-    alert("created success")
+    toast.success("created success")
    } catch (error) {
     console.log(error);
     if(error instanceof AxiosError){
@@ -18,7 +19,7 @@ export default class JournalService{
  static async Update(id,Data) {
    try {
     const res = await axiosInstance.patch(`/journal/${id}`,Data)
-    alert("Updated success")
+          toast.success("journal updated success")
    } catch (error) {
     console.log(error);
     if(error instanceof AxiosError){

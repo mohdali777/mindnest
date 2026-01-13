@@ -41,8 +41,6 @@ function App() {
   </Route>
 
       
-       <Route path="/test" element={<AppMain/>}/>
-
     </Routes>
     </>
   )
