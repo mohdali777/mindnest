@@ -29,4 +29,13 @@ id:Id
 throw error
 } 
 }
+
+async UpdateMood(user: Partial<USER_DTO>, Data: { mood: string; }): Promise<any> {
+    try {
+    await this.UserRepo.Update(user._id as string,{mood:Data.mood})
+    return Data.mood
+    } catch (error) {
+     throw error   
+    }
+}
 }

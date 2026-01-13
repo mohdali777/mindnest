@@ -33,7 +33,7 @@ export default class ChatRepo
 
   async FindMany(Filter: Partial<CHAT_DTO>): Promise<CHAT_DTO[]> {
     try {
-      const data = await ChatModel.find(Filter).lean();
+      const data = await ChatModel.find(Filter).sort({createdAt:1}).lean();
       return data.map((item) => ({
         _id: item._id.toString(),
         section_id: item.section_id,
