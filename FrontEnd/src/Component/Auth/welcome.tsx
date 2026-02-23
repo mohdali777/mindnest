@@ -21,7 +21,7 @@ const WelcomeSection: React.FC = () => (
       {/* Heading with better spacing */}
       <h2 className="text-6xl font-extrabold mb-4 leading-tight">
         Welcome to<br />
-        <span className="bg-gradient-to-r from-yellow-200 to-pink-200 bg-clip-text text-transparent">Mood Nest</span>
+        <span className="bg-gradient-to-r from-yellow-200 to-pink-200 bg-clip-text text-transparent">Mind Nest</span>
       </h2>
       <p className="text-lg opacity-95 mb-10 leading-relaxed">Your safe space for emotional wellness. Track your moods, chat with AI support, and discover personalized insights.</p>
       

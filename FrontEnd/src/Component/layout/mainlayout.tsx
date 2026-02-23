@@ -34,7 +34,7 @@ function Mainlayout() {
             <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
               <Heart className="w-7 h-7 text-white" />
             </div>
-            <span className="text-2xl font-bold text-gray-800">Mood Nest</span>
+            <span className="text-2xl font-bold text-gray-800">Mind Nest</span>
           </div>
 
           <div className="bg-white border-t border-gray-100">

@@ -27,7 +27,6 @@ systemInstruction:Instructions
 
 async askGemini(message: string, mood: string = "happy", history: any[] = []): Promise<string> {
 try {
-    console.log(mood);
     
 const systemInstruction = this.buildSystemPrompt(mood);
 this.UpdateSystemInstructions(systemInstruction)
@@ -66,7 +65,7 @@ Respond naturally and use the chat history to provide context only for emotional
 }
 
 private moodPrompt(mood: string): string {
-const moods: Record<string, string> = {
+const moods: Record<string, string> =  {
   amazing:
     "Be excited, celebratory, and enthusiastic. Match their energy, encourage sharing achievements, and amplify positive emotions.",
 
@@ -112,6 +111,7 @@ const moods: Record<string, string> = {
   bored:
     "Be playful, engaging, and creative. Introduce novelty, light humor, or fun suggestions.",
 };
+;
 return moods[mood] || "Be friendly, neutral, and supportive.";
 }
 }
